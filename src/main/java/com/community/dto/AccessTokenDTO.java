@@ -1,5 +1,8 @@
 package com.community.dto;
 
+/**
+ * 数据传输对象
+ */
 public class AccessTokenDTO {
 
     private String client_id;
@@ -40,8 +43,8 @@ public class AccessTokenDTO {
         this.redirect_uri = redirect_uri;
     }
 
-    public String getState(String state) {
-        return this.state;
+    public String getState() {
+        return state;
     }
 
     public void setState(String state) {

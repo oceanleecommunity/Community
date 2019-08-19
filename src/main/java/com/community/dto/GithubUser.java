@@ -1,7 +1,10 @@
 package com.community.dto;
 
-import java.math.BigInteger;
 
+
+/**
+ * 用户信息
+ */
 public class GithubUser {
     private String name;
     private Integer id;
