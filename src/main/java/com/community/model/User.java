@@ -1,9 +1,15 @@
 package com.community.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Com.OceanLee
  * @date 2019/8/21 18:47
+ * @data 是lombok 自动载入get set
  */
+@Data
 public class User {
     private Integer id;
     private String name;
@@ -11,6 +17,7 @@ public class User {
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
+    private String avatarUrl;
 
     public Integer getId() {
         return id;
@@ -58,5 +65,13 @@ public class User {
 
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

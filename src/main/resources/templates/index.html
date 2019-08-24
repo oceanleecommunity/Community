@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="css/community.css">
 
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">文友社区</a>
+            <a class="navbar-brand" href="/">文友社区</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left">
@@ -24,18 +25,21 @@
             </form>
             <ul class="nav navbar-nav">
                 <li><a href="" target="_blank"
-                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'BOOK_STORE','transport_type': 'NAV'})">待定</a>
+                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'BOOK_STORE','transport_type': 'NAV'})">小安子</a>
                 </li>
                 <li><a href="" target="_blank"
-                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'WEB','transport_type': 'NAV'})">待定</a>
+                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'WEB','transport_type': 'NAV'})">小静静</a>
                 </li>
                 <li><a href="" target="_blank"
-                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'WEB','transport_type': 'NAV'})">待定</a>
+                       onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'WEB','transport_type': 'NAV'})">仙女雨</a>
                 </li>
             </ul>
 
 
             <ul class="nav navbar-nav navbar-right">
+                <li th:if="${session.user!=null}">
+                    <a href="/publish">提问</a>
+                </li>
                 <li class="dropdown" th:if="${session.user!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"th:text="${session.user.getName()}"><span class="caret"></span></a>
@@ -50,5 +54,35 @@
         </div>
     </div>
 </nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h4><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp 发现</h4>
+            <hr>
+           <div class="media" th:each="question : ${questions}">
+               <div class="media-left">
+                   <a href="#">
+                       <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                   </a>
+               </div>
+               <div class="media-body">
+                   <h4 class="media-heading" th:text="${question.title}"></h4>
+                   <span th:text="${question.description}"></span><br>
+                   <span class="text-desc">
+                       <span th:text="${question.commentCount}"></span> 个回复·
+                       <span th:text="${question.viewCount}"></span> 次浏览·
+                       <span th:text="${#dates.format(question.gmtCreate,'dd MMMM yyyy')}"></span>
+                   </span>
+
+               </div>
+           </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="">热门话题</h4><br>
+        </div>
+    </div>
+
+
+</div>
 </body>
 </html>
