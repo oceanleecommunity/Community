@@ -1,5 +1,6 @@
 package com.community.service;
 
+import com.community.dto.PaginationDTO;
 import com.community.dto.QuestionDTO;
 import com.community.mapper.QuestionMapper;
 import com.community.mapper.UserMapper;
@@ -7,7 +8,6 @@ import com.community.model.Question;
 import com.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,8 +26,19 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
-        List<Question> questions = questionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount=questionMapper.count();
+        paginationDTO.setPagination(totalCount,page,size);
+
+        if(page < 1){
+            page =1;
+        }
+        if(page > paginationDTO.getTotalPage()){
+           page = paginationDTO.getTotalPage();
+        }
+        Integer offset = size * (page -1);
+        List<Question> questions = questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         //循环赋值
         for (Question question :questions){
@@ -37,6 +48,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return  questionDTOList;
+        paginationDTO.setQuestions(questionDTOList);
+        return paginationDTO;
     }
 }
