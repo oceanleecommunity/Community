@@ -31,3 +31,7 @@ body{
     font-size: 13px;
  }
 
+/*错误信息*/
+.jumbotron {
+    margin: 50px;
+}

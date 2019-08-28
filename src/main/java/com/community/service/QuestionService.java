@@ -2,6 +2,7 @@ package com.community.service;
 
 import com.community.dto.PaginationDTO;
 import com.community.dto.QuestionDTO;
+import com.community.exception.CustomizeException;
 import com.community.mapper.QuestionMapper;
 import com.community.mapper.UserMapper;
 import com.community.model.Question;
@@ -97,6 +98,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
+        if(question==null){
+            throw  new CustomizeException("你找的问题不见了，换个试试？");
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         //拿到user  设置
@@ -114,7 +118,8 @@ public class QuestionService {
         }else{
             //否则更新
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.update(question);
+         questionMapper.update(question);
+       
         }
     }
 }
