@@ -13,11 +13,20 @@
 <body>
 <div th:insert="~{navigation :: nav}"></div>
 
-    <div class="jumbotron" style="margin: 50px">
+
+<div class="jumbotron" style="min-height: 300px;">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
         <h1>出错了呀~~~~</h1>
-        <p th:text="${message }">换个姿势再来一次吧？</p>
+        <p th:text="${message}">换个姿势再来一次吧？</p>
         <p><a class="btn btn-primary btn-lg" href="/" role="button">返回主页</a></p>
     </div>
+
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <img class="img-thumbnail" style="width: 35%;" src="/images/official.jpg">
+    </div>
+
+
+</div>
 
 
 </body>
